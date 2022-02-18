@@ -10,20 +10,20 @@
 from adms_api.__init.__ import (IPADDR, PORT)
 from adms_api.core.LoggerInterface import setupLogger
 
+import os
+from flask import send_from_directory
 from flask import Flask, render_template, request, jsonify, json
 
 app=Flask(__name__)
 
-import os
-from flask import send_from_directory
-
-@app.route('/favicon.ico')
-def favicon():
-    return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico', mimetype='image/vnd.microsoft.icon')
-
 @app.route("/")
 def index():
     return render_template('index.html')
+    
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'assets'), 'favicon.ico', mimetype='image/vnd.microsoft.icon')
+
 
 
 # @app.route("/api/substinfo/<string:__subst>", methods=['GET'])
